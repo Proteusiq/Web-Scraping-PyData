@@ -1,0 +1,43 @@
+conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium jupyterlab ipython gensim scikit-learn keras tensorflow
+
+conda activate talks
+conda install -c conda-forge nodejs
+
+pip install requests_html tqdm fuzzywuzzy[speed] html5lib p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ython-Levenshtein
+
+
+
+cd Presentation
+
+npm install
+
+npm start
+
+
+run jupyter lab at > cd .. Presentation
+
+jupyter lab --port 8004
+
+
+
+rm -fr /home/pwd/.cache/pypoetry/virtualenvs/bolighed-py3.7

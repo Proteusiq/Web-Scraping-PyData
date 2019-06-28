@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>PyData Copnehagen</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section section data-background="#fff">
+				<h1>Chips & Fish</h1>
+				<small><h6>Every Website is an API</h6>
+					   <p>My Tips and Tricks in Web Scraping</p>
+				</small>
+				<p>
+					<small>
+						<a href="https://itelligencegroup.com/dk/trends/transformation-lab/" target="_blank">
+							<img src="images/transformation_lab.png" alt="Transformation Lab">
+						</a>
+						<br>
+						<br>
+						<a href="https://itelligencegroup.com/dk/trends/transformation-lab/" target="_blank">Prayson W. Daniel</a>
+					</small>
+				</p>
+				</section>
+				<section data-background="images/Stine.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Terms & Conditions</h2>
+						<p>Don't Be A Clown: 
+							<ul style="list-style-type:disc;">
+								<li>Read Terms of Use</li>
+								<li>Go Gentle</li>
+								<li>Be Open</li>
+							</ul>
+						</p>
+					</div>
+				</section>
+
+				<section data-background="images/Stines.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Tips and Tricks</h2>
+						<p>* What I have learned, unlearned and discovering in Web Scraping</p>
+						<p>* Not everyone likes Chips & Fish: These are my opinions of do-s and don'ts</p>
+						<p>Road Ahead:
+							<ul style="list-style-type:disc;">
+								<li>Basics: Leaving the Basics Behind</li>
+								<li>Better: It simple, but not always</li>
+								<li>Advance: Web Scraping Micro-services</li>
+							</ul>
+						</p>
+					</div>
+				</section>
+
+
+				<section data-background="images/BW.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+					<h3>Basic Web Scraping</h3>
+					<p>
+						<small style="font-size:20px">
+							GET | POST > Ninja HTML > Save Data
+						</small>
+					</p>
+				</div>
+				</section>
+				<section>
+					<h6>Basic: Simple Script</h6>
+					<pre><code class="hljs" data-trim data-line-numbers="8,10,12">
+						from bs4 import BeautifulSoup
+						import requests
+						
+						URL = 'https://www.dmi.dk/lokation/show/DK/'\
+						'2618425/København/'
+
+						# Get
+						r = requests.get(URL)
+						
+						soup = BeautifulSoup(r.content,'lxml')
+
+						# Ninja the HTML soup
+						...
+		
+						</code></pre>
+				</section>
+
+				<section data-background="images/dmi.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h3>Better: Simple Web Scraping</h3>
+						<p>
+							<small style="font-size:20px" >
+								GET | POST > Save Data
+							</small>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h6>Better: Simple Script</h6>
+					<pre><code class="hljs" data-trim data-line-numbers="8-10,12, 16-17">
+						import requests
+
+						URL = 'https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk'
+						params = {'cmd': 'llj',
+								'id': 2618425,
+								'tz': 'Europe/Copenhagen'}
+
+						headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) '\
+									 'AppleWebKit/537.36 (KHTML, like Gecko) '\
+									 'Chrome/75.0.3770.80 Safari/537.36'}
+
+						# Do as Chrome
+						s = requests.Session()
+						s.headers.update(headers)
+
+						r = s.get(URL, params=params)
+						data = r.json()
+
+						# Dance with beautiful JSON response
+						...
+
+										</code></pre>
+				</section>
+
+				<section data-background="images/micro.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h3>Advance: Web Scraping ++</h3>
+						<p>
+							<small style="font-size:20px">
+							[GET | POST > Save Data] -> Automate -> Monitor -> Use
+							</small>
+						</p>
+					</div>
+				</section>
+
+				
+				<section data-background="images/WB.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h3>Demo</h3>
+						<p>
+							<small>
+								Enough Talking, Show Me!
+							</small>
+						</p>
+					</div>
+				</section>
+
+
+				<section data-background="images/Stines.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Examples: Tips & Tricks</h2>
+						<p>
+							<ul style="list-style-type:disc;">
+								<li>Use Network: Less is More</li>
+								<li>Use Progress Bar & Threading: <a href="https://github.com/Proteusiq/TrustPilotReader" target="_blank">TrustPilotReader</a></li>
+								<li>Random Snoozer: Bolighed (Example Only)</li>
+								<li>Package: Bolighed (Example Only)</li>
+								<li>Dockerize & Automate: <a href="https://github.com/Proteusiq/boliga" target="_blank">Boliga</a></li>
+							</ul>
+						</p>
+					</div>
+				</section>
+
+				<section data-background="images/python.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h6>Code Time!</h6>
+					</div>
+				</section>
+
+
+				<section data-background="images/mining.png">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Go Turn Websites to APIs!</h2>
+						<p>Thank you!</p>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

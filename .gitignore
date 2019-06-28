@@ -1,0 +1,7 @@
+Presentation/node_modules
+examples/bolighed.egg-info
+
+.vscode
+.ipynb_checkpoints
+
+*.pkl
