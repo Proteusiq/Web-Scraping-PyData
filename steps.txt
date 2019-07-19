@@ -3,7 +3,7 @@ conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium ju
 conda activate talks
 conda install -c conda-forge nodejs
 
-pip install requests_html tqdm fuzzywuzzy[speed] html5lib p
+pip install requests_html tqdm fuzzywuzzy[speed] html5lib
 
 
 
