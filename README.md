@@ -10,6 +10,15 @@ From basic web scraping, to advance tips and tricks of gathering and storing web
 
 Assuming that you have Anaconda or miniconda installed in your system:
 
+Auto:
+
+```sh
+conda env create -f environment.yml
+conda activate talks
+```
+
+Manually:
+
 ```sh
 conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium jupyterlab ipython
 
