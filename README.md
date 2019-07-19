@@ -15,27 +15,31 @@ conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium ju
 
 conda activate talks
 conda install -c conda-forge nodejs
-
-pip install requests_html tqdm fuzzywuzzy[speed] html5lib
+pip install requests_html tqdm fuzzywuzzy[speed] html5lib python-Levenshtein
 ```
 
 
 ## Presentation
 
-Coming soon
+```sh
+conda activate talks
+cd Presentation
+npm install # Needed only once
+npm start
+```
 
 
 ## Notebooks
 
-Coming soon
+```sh
+jupyter lab --port 8004
+```
 
 ## Examples
 
-Coming soon
-
 ```sh
-make install
-npm test
+cd examples
+python bilbase.py
 ```
 
 ## Release History
@@ -52,7 +56,7 @@ Comming Soon
 
 ## Meta
 
-Your Name – [@YourTwitter](https://twitter.com/proteusiq) – praysonwilfred@gmail.com
+Your Name – [@proteusiq](https://twitter.com/proteusiq) – praysonwilfred@gmail.com
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
