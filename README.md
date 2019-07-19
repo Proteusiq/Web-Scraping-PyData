@@ -1,23 +1,50 @@
-# PyData-WebScraping
+# Web Scraping: PyData Copenhagen
 
 > Tips and Tricks for web data collections using Python
 
-From basic web scraping, to advance tips and tricks of gathering and storing web data using Python's rich eco-systems.
+From basic web scraping, to advance web scraping micro-services, these are my tips and tricks of gathering and storing web data using Python's rich eco-systems.
 
 ![](images/header.png)
 
+## Do's and Don'ts of Web Scraping
+- Don't Be A Clown
+- Always read and understand 'Terms of Use'
+- Go Gentle
+- Be Open
+
+## Talk
+* What I have learned, unlearned and discovering in Web Scraping
+
+* Not everyone likes Chips & Fish: These are my opinions of do-s and don'ts
+
+Road Ahead:
+
+- Basics: Leaving the Basics Behind
+- Better: It simple, but not always
+- Advance: Web Scraping Micro-services
+
 ## Installation
 
-Assuming that you have Anaconda or miniconda installed in your system:
+Assuming that you have git, Anaconda or miniconda installed in your system:
 
-Auto:
+Clone Repo:
+
+```sh
+git clone https://github.com/Proteusiq/PyData-WebScraping.git
+cd PyData-WebScraping
+```
+Automatic:
+
+Recreate the environment from yaml:
 
 ```sh
 conda env create -f environment.yml
 conda activate talks
 ```
 
-Manually:
+If automatic creation of the environment above failed, you can manually create the environment
+
+Manually [Only if automatic failed]:
 
 ```sh
 conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium jupyterlab ipython
