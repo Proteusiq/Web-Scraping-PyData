@@ -75,6 +75,14 @@ presented tips and tricks.
 ## Examples
 
 Example on how to use Network to gather data.
+
+![](Presentation/images/network.png)!
+
+Results:
+![](Presentation/images/network2.png)
+
+code examples:
+
 - bilbase.py and bilbase_api.py show how to write same code with two different approaches
 - bolig_network.py show how to write a single code that capture almost all Denmark's real estates data.
 - boliga_progress_bar show how to add a progress bar in web scraping
