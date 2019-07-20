@@ -109,7 +109,7 @@ Comming Soon
 
 ## Meta
 
-Your Name – [@proteusiq](https://twitter.com/proteusiq) – praysonwilfred@gmail.com
+Prayson Daniel – [@proteusiq](https://twitter.com/proteusiq) – praysonwilfred@gmail.com
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
