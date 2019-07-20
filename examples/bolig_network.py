@@ -1,3 +1,10 @@
+'''
+One Function to Rule them all
+Example of using Network to capture real Denmark's estate data
+Simple modification to get more pages
+Note: Use for educational purposes only
+'''
+
 import pandas as pd
 from requests import Session
 
@@ -19,7 +26,7 @@ def get_data(url, method='get',**kwargs):
           }
              
     res = req[method]
-
+    print(f'Data from: {url}')
     return res.json()
 
 # abc_data are for post and abc_params are for get calls
@@ -82,6 +89,10 @@ real_params = {
     'PageSize': 100
 }
 
+data = get_data(url=REAL_URL, params=real_params)
+real_df = pd.DataFrame(data['Boliger'])
+print(real_df.head(3))
+
 
 # MMLiving and Livingday
 
@@ -92,6 +103,10 @@ mml_params = {
     'lege': 1,
     'solgt': 0
 }
+
+data = get_data(url=MML_URL, params=mml_params)
+mml_df = pd.DataFrame(data).T
+print(mml_df.head(3))
 
 LIV_URL = 'https://livingday.dk/request/caselist/'
 liv_params = {
@@ -107,4 +122,6 @@ liv_params = {
     'private': 1
 }
 
-
+data = get_data(url=LIV_URL, params=liv_params)
+liv_df = pd.DataFrame(data)
+print(liv_df.head(3))
