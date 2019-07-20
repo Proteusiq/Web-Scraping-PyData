@@ -2,7 +2,7 @@
 
 > Tips and Tricks for web data collections using Python
 
-From basic  to advance web scraping, these are my tips and tricks of gathering and storing web data using Python's rich eco-systems.
+From basic  to advance web scraping, these are my tips and tricks on how to gather, automate, and store web data using Python's rich eco-systems.
 
 ![](Presentation/images/micro.png)
 
