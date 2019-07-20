@@ -30,8 +30,8 @@ Assuming that you have git, Anaconda or miniconda installed in your system:
 Clone Repo:
 
 ```sh
-git clone https://github.com/Proteusiq/PyData-WebScraping.git
-cd PyData-WebScraping
+git clone https://github.com/Proteusiq/Web-Scraping-PyData.git
+cd Web-Scraping-PyData
 ```
 #### Automatic: Recreate the environment from yaml:
 
@@ -109,7 +109,7 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 
 ## Contributing
 
-1. Fork it (<https://github.com/Proteusiq/PyData-WebScraping/fork>)
+1. Fork it (<https://github.com/Proteusiq/Web-Scraping-PyData/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
