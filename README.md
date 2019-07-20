@@ -74,7 +74,7 @@ presented tips and tricks.
 
 ## Examples
 
-Example on how to use Network to gather data.
+Examples highlighting the use Network to gather data.
 
 ![](Presentation/images/network.png)!
 
