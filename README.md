@@ -33,9 +33,7 @@ Clone Repo:
 git clone https://github.com/Proteusiq/PyData-WebScraping.git
 cd PyData-WebScraping
 ```
-Automatic:
-
-Recreate the environment from yaml:
+#### Automatic: Recreate the environment from yaml:
 
 ```sh
 conda env create -f environment.yml
@@ -44,7 +42,7 @@ conda activate talks
 
 If automatic creation of the environment above failed, you can manually create the environment
 
-Manually [Only if automatic failed]:
+#### Manually [Only if automatic failed]:
 
 ```sh
 conda create -n talks python=3.7 pandas requests beautifulsoup4 lxml selenium jupyterlab ipython
@@ -70,6 +68,9 @@ npm start
 ```sh
 jupyter lab --port 8004
 ```
+
+Navigate to notebooks. Notebooks are chronological numbered to explain
+presented tips and tricks.
 
 ## Examples
 
