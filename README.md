@@ -4,7 +4,7 @@
 
 From basic web scraping, to advance web scraping micro-services, these are my tips and tricks of gathering and storing web data using Python's rich eco-systems.
 
-![](images/header.png)
+![](Presentation/images/micro.png)
 
 ## Do's and Don'ts of Web Scraping
 - Don't Be A Clown
@@ -82,10 +82,10 @@ python bilbase.py
 
 Comming Soon
 * 0.1.5
-    * CHANGE: Update docs (module code remains unchanged)
+    * CHANGE: New examples and use of selenium
 * 0.1.4
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
+    * CHANGE: Adding Nodejs 
+    * ADD: Scrabing using JavaScript
  
 * 0.0.1
     * Work in progress
@@ -100,7 +100,7 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (<https://github.com/Proteusiq/PyData-WebScraping/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
