@@ -2,7 +2,7 @@
 Web Scraping Using Requests and BeautifulSoup
     Aim to show how we ought not ninja HTML
     Design to show common pattern that we do not have to follow as 
-    Network offers discoverable APIs
+    Network offers discoverable APIs see bilbase_api.py
     e.g. https://www.bilbasen.dk/api/newest?page=1&pagesize=100
 '''
 

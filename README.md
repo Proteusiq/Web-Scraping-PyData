@@ -74,6 +74,13 @@ presented tips and tricks.
 
 ## Examples
 
+Example on how to use Network to gather data.
+- bilbase.py and bilbase_api.py show how to write same code with two different approaches
+- bolig_network.py show how to write a single code that capture almost all Denmark's real estates data.
+- boliga_progress_bar show how to add a progress bar in web scraping
+- coming soon logging, mongodb, celery, and more
+
+You can run any example as:
 ```sh
 cd examples
 python bilbase.py
@@ -83,6 +90,7 @@ python bilbase.py
 
 Comming Soon
 * 0.1.5
+    * ADD: Micro-service repo
     * CHANGE: New examples and use of selenium
 * 0.1.4
     * CHANGE: Adding Nodejs 
