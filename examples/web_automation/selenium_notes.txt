@@ -1,0 +1,8 @@
+Selenium needs a browser. I will be using Chrome download from
+https://sites.google.com/a/chromium.org/chromedriver/home. As I
+am on ubuntu, I will download chromedriver_linux64
+
+In Linux:
+sudo mv chromedriver /usr/bin/chromedriver
+sudo chown root:root /usr/bin/chromedriver
+sudo chmod +x /usr/bin/chromedriver
