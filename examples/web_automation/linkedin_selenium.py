@@ -2,47 +2,7 @@
 Simple way of using selenium to get LinkedIn Connection Name and Title
 '''
 
-
-import os
-import time
-
-from bs4 import BeautifulSoup
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-
-# Remove the Automation Info 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--disable-infobars")
-driver = webdriver.Chrome(options=chrome_options)
-
-URL = 'https://www.linkedin.com/'
-
-
-
-def sign_in():
-    
-    driver.get(URL)
-
-    btn = driver.find_element_by_css_selector('a.nav__button-secondary')
-    btn.click()
-    
-    user_name = driver.find_element_by_id('username')
-    user_name.clear()
-    user_name.send_keys(os.environ.get('LINKEDIN_USER'))
-    
-    user_pwd = driver.find_element_by_id('password')
-    user_pwd.send_keys(os.environ.get('LINKEDIN_PWD'))
-
-    user_pwd.submit()
-    #user_pwd.send_keys(Keys.ENTER)
-
 from collections import defaultdict
-
 import logging
 import os
 import time
