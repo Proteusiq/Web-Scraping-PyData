@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 # Remove the Automation Info 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--disable-infobars")
-driver = webdriver.Chrome(chrome_options=chrome_options)
+driver = webdriver.Chrome(options=chrome_options)
 
 URL = 'https://www.linkedin.com/'
 
