@@ -3,8 +3,10 @@ Simple way of using selenium to get LinkedIn Connection Name and Title
 '''
 
 from collections import defaultdict
+import json
 import logging
 import os
+import re
 import time
 
 from bs4 import BeautifulSoup, element as bs4_element
@@ -17,6 +19,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utils import helpers
+
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', 
                     datefmt='%d-%b-%y %H:%M:%S',
                     level=logging.INFO)
@@ -24,15 +28,53 @@ logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s',
 class LinkedIn:
     
     def __init__(self, snooze=2):
-        
+
+        self.login = False
         logging.info('Setting Up LinkedIn')
         self.snooze = snooze
-         
+
+    def __repr__(self):
+        
+        if self.login:
+            self._LinkedIn__my_profile()
+            show = f'[On] LinkedIn({repr(self.my_name)})'
+        else:
+            show = '[Off] LinkedIn()'
+
+        return show
+
+        
+
+    def __enter__(self):
+
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+
+        self.driver.quit()
+        self.login = False
+        logging.info('Driver quit successful')
+
 
     def sign_in(self, username, password):
+
+        try:
+            assert username and password, 'Incorrect credentials'
+        
+        except AssertionError:
+            logging.error('No credentials', exc_info=True)
+            logging.info('Pass in Username and Password')
+
+            # needed if all failed ask and place to session
+            from getpass import getpass 
+            username = input('Username: ')
+            password = getpass('Password: ')
+
         logging.info('Login in LinkedIn')
         self.username = username
         self.password = password
+
+        
         
         # Remove the Automation Info 
         chrome_options = webdriver.ChromeOptions()
@@ -55,8 +97,9 @@ class LinkedIn:
         user_pwd.submit()
         
         self.driver = driver
-        
+        self.login = True
         logging.info('Login Successful')
+
         return self
     
     def sign_off(self, soup=True):
@@ -69,8 +112,29 @@ class LinkedIn:
             
         self.driver.close()
         logging.info('Logoff Successful')
+        self.login = False
         return self
-    
+
+    def __my_profile(self):
+        '''Private function
+        Note meant to be used outside class
+        Get My Profiles Name, Info and Id
+        '''
+
+        pattern = re.compile('^bpr-guid-*')
+        codes = helpers.driver_tags(self.driver, 
+                                    search='find_all',
+                                    query=('code',{'id':pattern}))
+        data = [code.get_text(strip=True) for code in codes 
+                if 'publicContactInfo' in code.get_text(strip=True)]
+
+        mig = json.loads(data[-1])
+        self.my_name = f"{mig['included'][0]['firstName']} {mig['included'][0]['lastName']}"
+        self.my_info = mig['included'][0]['occupation']
+        self.my_profile_id = mig['included'][0]['publicIdentifier']
+
+        return self
+
     
     @property
     def connections(self):

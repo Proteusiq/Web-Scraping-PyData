@@ -5,3 +5,8 @@ examples/bolighed.egg-info
 .ipynb_checkpoints
 
 *.pkl
+
+*.pyc
+
+__pycache__/
+
