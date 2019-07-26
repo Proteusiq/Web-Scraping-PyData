@@ -3,6 +3,7 @@ import io
 from bs4 import BeautifulSoup
 from PIL import Image
 
+
 def driver_tags(driver, search, query, parser='lxml'):
     '''
     Return searched soup from selenium driver
@@ -38,9 +39,11 @@ def show_element(driver, element):
     
     :raises ValueError: Coming soon
     :raises TypeError: Coming soon
+
+
+    #TODO: Get size to decide which ember 43-45 
     '''
     
-     driver.maximize_window()
      location = element.location
      size = element.size
      _ = driver.get_screenshot_as_png()

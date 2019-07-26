@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from selenium import webdriver
+from selenium.common import exceptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -26,10 +27,13 @@ logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s',
                     level=logging.INFO)
 
 class LinkedIn:
+    '''
+    '''
     
     def __init__(self, snooze=2):
 
         self.login = False
+        self.message_window_is_miminized = False
         logging.info('Setting Up LinkedIn')
         self.snooze = snooze
 
@@ -181,15 +185,85 @@ class LinkedIn:
         print(']\n')
         
         logging.info('Scrolling Completed!')   
-        return self     
+        return self
+
+    @property    
+    def  minimize_message_window(self):
+    
+        class_ = 'msg-overlay-bubble-header__button'
+        msg_window = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.CLASS_NAME, class_)))
+        
+        msg = msg_window.text
+        
+        if 'minimize' in msg:
+            msg_window.click()
+            logging.info('Message Window Minimized')
+        else:
+            logging.info('Message Window already minimized')
+
+        self.message_window_is_miminized = True  
+        return self
+
+    @property    
+    def  get_all_connections(self):
+        
+        total_connections = "search-results__total"
+        connections_filter = "search-s-facet__form"
+        clear_btn = "facet-collection-list__clear-button"
+        apply_btn = "facet-collection-list__apply-button"
+
+        try: 
+            self.driver.find_elements_by_class_name(connections_filter)[0].click()
+            WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.CLASS_NAME, clear_btn))
+                    ).click()
+            WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.CLASS_NAME, apply_btn))).click()
+            logging.info('Getting all connections')
+            self.all_connections = True
+        
+        except exceptions.NoSuchElementException:
+            self.all_connections = True
+            logging.info('Already have all connections')
+            pass
+
+        connection_num = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.CLASS_NAME, total_connections))).text
+
+        self.connection_total = int(connection_num.split()[1])
+        self.pages = np.ceil(self.connection_total/10).astype(int)
+        
+        return self
+    
 
 class LinkedInSoup:
-    
-    def __init__(self, soup):
+    ''' LinkedInSoup
+     # TODO
+    '''
+
+    def __init__(self, driver, parser='lxml'):
+
+        '''
+        Return show image of element from selenium driver
+
+        :param selenium driver: Selenium driver instance
+        :param selenium element: Selenium element to focus
+
+        :return: TODO
         
-        if not isinstance(soup, bs4_element.Tag):
-            logging.error(f'Beautiful soup element required. {type(soup)} was given')
+        :raises ValueError: Coming soon
+        :raises TypeError: Coming soon
+        '''
+        
+        soup = BeautifulSoup(
+                driver.page_source, parser)
         self.soup = soup
+        self.driver = driver
         self.store = defaultdict(list)
         
     def __repr__(self):
@@ -207,7 +281,7 @@ class LinkedInSoup:
         return show[1:]
         
     def prep_connection(self, image=False):
-        
+
         section = self.soup.find('section',class_='mn-connections')
         connections = section.find_all('li', class_='list-style-none')
         logging.info(f'{len(connections)} connections found')
@@ -224,7 +298,67 @@ class LinkedInSoup:
             self.store['title'].append(title)
             
         return self
+
+    def get_profile_info(self, profile_url, parser='lxml'):
         
+        self.driver.get(profile_url)
+        
+        codes = BeautifulSoup(
+            self.driver.page_source,parser).find_all('code')
+        
+        try:
+            data = [json.loads(code.get_text(strip=True)) for code in codes 
+                if "*profile" in code.get_text(strip=True)][0]
+
+            logging.info(f'{profile_url}: Profile info found')
+
+            return data
+        
+        except IndexError:
+            logging.warning(f'{profile_url}: Profile info not found')
+            
+ 
+    def get_profile_data(self, profile_url, parser='lxml'):
+        
+        self.driver.get(profile_url)
+        
+        codes = BeautifulSoup(
+            self.driver.page_source,parser).find_all('code')
+        
+        try:
+            data = [json.loads(code.get_text(strip=True)) for code in codes 
+                if code.get_text(strip=True).startswith('{"data"')]
+
+            logging.info(f'{profile_url}: {len(data)} chucks of profile data found')
+
+            return data
+        
+        except IndexError:
+            logging.warning(f'{profile_url}: No chucks of profile data found')
+
+    def get_driver_data(self, driver, parser='lxml'):
+        '''
+        requires a current driver
+        '''
+        self.driver = driver
+        
+        codes = BeautifulSoup(
+            self.driver.page_source,parser).find_all('code')
+        
+        try:
+            data = [json.loads(code.get_text(strip=True)) for code in codes 
+                if code.get_text(strip=True).startswith('{"data"')]
+
+            logging.info(f'Codes Data: {len(data)} chucks of codes data found')
+
+            return data
+        
+        except IndexError:
+            logging.warning(f'Codes Data: No chucks of data found')
+
+
+
+      
 
 if __name__ == '__main__':
     
@@ -240,11 +374,10 @@ if __name__ == '__main__':
         
     finally:
         
+        connections = LinkedInSoup(linkedin.driver)
+        connections.prep_connection()
         linkedin.sign_off()
     
-    connections = LinkedInSoup(linkedin.soup)
-    
-    connections.prep_connection()
     
     df = pd.DataFrame(connections.store)
     
