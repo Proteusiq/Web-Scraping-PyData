@@ -1,7 +1,7 @@
 
 '''
 Web Scraping Using Requests
-    Aim to show use only requests and pandas (No need to ninja HTML)
+    Aim to show how to use only requests and pandas (No need to ninja HTML)
     Design to show new pattern that we can follow 
     Using API found in Network
     e.g. https://www.bilbasen.dk/api/newest?page=1&pagesize=100
