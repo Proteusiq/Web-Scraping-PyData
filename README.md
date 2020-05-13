@@ -86,6 +86,7 @@ code examples:
 - `bilbase.py` and `bilbase_api.py`: how to write same code with two different approaches
 - `bolig_network.py`: how to write a single code that capture almost all Denmark's real estates data.
 - `boliga_progress_bar.py`: how to add a progress bar in web scraping
+- `advance> run example.py`: Advance web scraping. Build friendly API: a single class to rule them all
 - coming soon logging, mongodb, celery, and more
 
 You can run any example as:
