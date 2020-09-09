@@ -107,6 +107,10 @@ Comming Soon
  
 * 0.0.1
     * Work in progress
+    
+    
+## Resources:
+[Awesome Web Scraping (Python) ](https://github.com/lorien/awesome-web-scraping/blob/master/python.md])
 
 ## Meta
 
