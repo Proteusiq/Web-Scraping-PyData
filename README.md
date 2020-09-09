@@ -110,7 +110,7 @@ Comming Soon
     
     
 ## Resources:
-[Awesome Web Scraping (Python) ](https://github.com/lorien/awesome-web-scraping/blob/master/python.md])
+[Awesome Web Scraping (Python) ](https://github.com/lorien/awesome-web-scraping/blob/master/python.md)
 
 ## Meta
 
