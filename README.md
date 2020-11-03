@@ -15,6 +15,7 @@ From basic  to advance web scraping, these are my tips and tricks on how to gath
 ## Legality of Web Scraping 
 
 [Twenty Years of Web Scraping and the Computer Fraud and Abuse Act](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3221625)
+
 [Victory! Ruling in hiQ v. Linkedin Protects Scraping of Public Data | Electronic Frontier Foundation](https://www.eff.org/deeplinks/2019/09/victory-ruling-hiq-v-linkedin-protects-scraping-public-data)
 
 ## Talk
